@@ -1,7 +1,6 @@
 # sampling
 
 ## To-dos
-1. Add login strategy
 2. Error handling on registration
 3. Set up flash messages
 4. Log out

@@ -57,6 +57,32 @@ module.exports = (passport) => {
     })
   )
 
-  // Login
-  // TODO: create the local passport strategy for login 
-}
+  // Log in
+  passport.use(
+    'local-login',
+    new LocalStrategy({
+      usernameField: 'email',
+      passwordField: 'password',
+      passReqToCallback: true
+    },
+    (req, email, password, done) => {
+      connection.query('SELECT * FROM users WHERE email = ?', [email], (err, rows) => {
+        if (err) {
+          console.log('Unknown error has occured.')
+          return done(err)
+        }
+        if (!rows.length) {
+          console.log('No user found.')
+          return done(null, false, req.flash('loginMessage', 'No user found.'))
+        }
+
+      if (!bcrypt.compareSync(password, rows[0].password)) {
+        console.log('Password was incorrect. Login failed.')
+        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'))
+      }
+
+      console.log('Successfully logged in!')
+      return done(null, rows[0])
+    })
+  })
+)}
