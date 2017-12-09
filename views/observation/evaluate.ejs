@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+
+
+<form class="container" action = "/submit-observation" method="POST">
+    <div class = "form-group">
+        <label>Select how severe you think the author of the following text suffers from depression:</label>
+        <p class="lead container sample-text">"Depression isn't always at 3am when you're alone with only the thoughts in your head. Sometimes it's at 3pm, when you're surrounded by friends in the middle of laughing." This is high functioning depression. So many people don't get it. I look normal on the outside, but that's because I try very hard to.</p>
+        <div class="list-group">
+          <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-lg-center">Absent</a>
+          <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-lg-center">Mild</a>
+          <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-lg-center active">Moderate</a>
+          <a href="#!" class="list-group-item list-group-item-action d-flex justify-content-lg-center">Severe</a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Notes</label>
+        <textarea type="textarea" rows="3" class="form-control" id="notes"></textarea>
+    </div>
+    <br>
+    <div class="container mybuttons">
+      <button type="button" class="btn btn-primary mybuttons">submit</button>
+      <br>
+      <br>
+      <button type="button" class="btn btn-secondary mybuttons">skip</button>
+    </div>
+</form>
+
+<% include ../partials/footer %>

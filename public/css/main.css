@@ -1,0 +1,15 @@
+.sample-text {
+  background-color: rgb(249,249,249);
+  border: 1px solid rgb(77,77,77);
+  padding: 1rem 2rem;
+}
+
+
+.mybuttons {
+  text-align: center;
+  margin: 0 auto;
+}
+
+nav {
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,28 @@
+<% include partials/header %>
+
+<div class = "container-fluid">
+    <br>
+    <h1 class = "text-center">Register</h1>
+    <form class="container" action = "/user/register" method="POST">
+        <div class = "form-group">
+            <label>Email Address</label>
+            <input class = "form-control" type = "email" name = "email" placeholder = "lknope@pawnee.gov" required>
+        </div>
+        <div class = "form-group">
+            <label>Alias</label>
+            <input class = "form-control" type = "text" name = "username" placeholder = "Mrs. Joe Biden" pattern="[a-z0-9]{0,35}">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name = "password" placeholder="" required>
+        </div>
+        <div class="form-group">
+            <label>Re-enter Password</label>
+            <input type="password" class="form-control" name = "passwordReentry" placeholder="" required>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-secondary btn-block">Submit</button>
+    </form>
+</div>
+
+<% include partials/footer %>
