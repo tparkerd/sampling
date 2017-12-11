@@ -41,7 +41,7 @@ router.post('/',
 
       // Send the errors back to the client
       Object.keys(errors).map( (key, index) => {
-        req.flash('alert alert-danger', errors[key].msg)
+        req.flash('error', errors[key].msg)
       })
 
       // Go back to registration form

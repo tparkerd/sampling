@@ -38,7 +38,7 @@ module.exports = (passport) => {
           return done(err)
         }
         if (rows.length) {
-          return done(null, false, req.flash('alert alert-danger', 'That email has been already been used.'))
+          return done(null, false, req.flash('error', 'Email has been previously used.'))
         }
         else {
           let newUserMysql = {
@@ -67,12 +67,11 @@ module.exports = (passport) => {
     (req, email, password, done) => {
       connection.query('SELECT * FROM users WHERE email = ?', [email], (err, rows) => {
         if (err) {
-          console.log('Unknown error has occured.')
+          console.error(new Error('An error occurred during registration.'))
           return done(err)
         }
         if (!rows.length) {
-          console.log('No user found.')
-          return done(null, false, req.flash('loginMessage', 'No user found.'))
+          return done(null, false, req.flash('success', 'No user found.'))
         }
 
       if (!bcrypt.compareSync(password, rows[0].password)) {
