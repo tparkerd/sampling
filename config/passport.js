@@ -78,7 +78,7 @@ module.exports = (passport) => {
         console.log('Password was incorrect. Login failed.')
         return done(null, false, req.flash('warning', 'Oops! Wrong password.'))
       }
-      
+
       // Login successful
       return done(null, rows[0], req.flash('success', 'You have successfully logged in.'))
     })
