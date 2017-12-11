@@ -38,8 +38,7 @@ module.exports = (passport) => {
           return done(err)
         }
         if (rows.length) {
-          console.error(new Error('User already exists'))
-          return done(null, false, req.flash('signupMessage', 'That email has been already been used.'))
+          return done(null, false, req.flash('alert alert-danger', 'That email has been already been used.'))
         }
         else {
           let newUserMysql = {
