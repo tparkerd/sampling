@@ -71,12 +71,12 @@ module.exports = (passport) => {
           return done(err)
         }
         if (!rows.length) {
-          return done(null, false, req.flash('success', 'No user found.'))
+          return done(null, false, req.flash('success', 'User not found.'))
         }
 
       if (!bcrypt.compareSync(password, rows[0].password)) {
         console.log('Password was incorrect. Login failed.')
-        return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'))
+        return done(null, false, req.flash('warning', 'Oops! Wrong password.'))
       }
 
       console.log('Successfully logged in!')

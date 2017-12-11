@@ -1,3 +1,7 @@
+<!-- NOTE: Alternatively, the keys in the messages object contain the
+           arrays of each type (key). So you could loop through each
+           key's array and do something different for each type -->
+
 <div id="messages" class="container">
 <% Object.keys(messages).forEach(function (type) { %>
   <% messages[type].forEach(function (message) { %>

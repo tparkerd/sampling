@@ -19,7 +19,7 @@ router.post('/',
 
     // Check if user entered a password and that it matches its re-entered value
     check('password').exists(),
-    check('passwordReentry', 'Password confirmation does not match original password.')
+    check('passwordReentry', 'Passwords do not match.')
       .exists()
       .custom((value, { req }) => value === req.body.password)
   ], (req, res, next) => {
