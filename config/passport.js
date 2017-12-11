@@ -71,16 +71,16 @@ module.exports = (passport) => {
           return done(err)
         }
         if (!rows.length) {
-          return done(null, false, req.flash('success', 'User not found.'))
+          return done(null, false, req.flash('warning', 'User does not exist.'))
         }
 
       if (!bcrypt.compareSync(password, rows[0].password)) {
         console.log('Password was incorrect. Login failed.')
         return done(null, false, req.flash('warning', 'Oops! Wrong password.'))
       }
-
-      console.log('Successfully logged in!')
-      return done(null, rows[0])
+      
+      // Login successful
+      return done(null, rows[0], req.flash('success', 'You have successfully logged in.'))
     })
   })
 )}
