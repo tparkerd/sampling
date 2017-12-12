@@ -43,11 +43,12 @@ module.exports = (passport) => {
         else {
           let newUserMysql = {
             email: email,
-            password: bcrypt.hashSync(password, null, null)
+            password: bcrypt.hashSync(password, null, null),
+            alias: req.body.alias
           }
-          let insertQuery = 'INSERT INTO users (email, password) VALUES (?, ?)'
+          let insertQuery = 'INSERT INTO users (email, password, alias) VALUES (?, ?, ?)'
 
-          connection.query(insertQuery, [newUserMysql.email, newUserMysql.password], (err, rows) => {
+          connection.query(insertQuery, [newUserMysql.email, newUserMysql.password, newUserMysql.alias], (err, rows) => {
             newUserMysql.id = rows.insertId
             return done(null, newUserMysql)
           })

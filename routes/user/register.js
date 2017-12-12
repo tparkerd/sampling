@@ -17,12 +17,21 @@ router.post('/',
       .trim()
       .normalizeEmail(),
 
+    // Make sure the alias only contains alphanumeric values, commas, periods, or space.
+    check('alias', 'Alias contains illegal characters. Please use alphanumeric characters and commas, periods, or spaces. Leading and trialing whitespace is removed.')
+      .trim()
+      .matches(/^[A-z0-9,.\s]*$/),
+
     // Check if user entered a password and that it matches its re-entered value
     check('password').exists(),
     check('passwordReentry', 'Passwords do not match.')
       .exists()
       .custom((value, { req }) => value === req.body.password)
+
+
   ], (req, res, next) => {
+    // console.log(req.body);
+    console.log(check().matches());
     // Check that
     try {
       // Throw error if any input was invalid

@@ -6,19 +6,38 @@
     <form class="container" action="/user/register" method="POST">
         <div class="form-group">
             <label>Email Address</label>
-            <input class="form-control" type="email" name="email" placeholder="lknope@pawnee.gov" required>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+              <input class="form-control" type="email" name="email" placeholder="lknope@pawnee.gov" required>
+            </div>
         </div>
         <div class="form-group">
             <label>Alias</label>
-            <input class="form-control" type="text" name="username" placeholder="Mrs. Joe Biden" pattern="[A-z0-9,.\s]{0,35}">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon2"><i class="fa fa-user" aria-hidden="true"></i></span>
+              <input class="form-control" type="text" name="alias" placeholder="Mrs. Joe Biden" pattern="[A-z0-9,.\s]{0,35}">
+            </div>
         </div>
         <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control" name="password" placeholder="" required>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon3"><i class="fa fa-lock" aria-hidden="true"></i></span>
+              <input type="password" class="form-control" name="password" placeholder="" required>
+            </div>
         </div>
         <div class="form-group">
             <label>Re-enter Password</label>
-            <input type="password" class="form-control" name="passwordReentry" placeholder="" required>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon4"><i class="fa fa-lock" aria-hidden="true"></i></span>
+              <input type="password" class="form-control" name="passwordReentry" placeholder="" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Token</label>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon5"><i class="fa fa-asterisk" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" name="token" placeholder="" required>
+            </div>
         </div>
         <br>
         <button type="submit" class="btn btn-secondary btn-block">Submit</button>
