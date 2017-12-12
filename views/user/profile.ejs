@@ -1,0 +1,50 @@
+<% include partials/header %>
+
+<div class="container container-fluid">
+  <h4>View Profile</h4>
+  <h5>Details</h5>
+  <div class="container container-fluid">
+    <ul>
+      <li>Email: <%= user.email %></li>
+      <li>Alias: <%= user.alias %></li>
+      <li>Classifications: <%= user.classificationCount %></li>
+    </ul>
+
+  </div>
+
+  <h5>Classifications</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col-6">Content</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>
+
+<% include partials/footer %>

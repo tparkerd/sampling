@@ -1,0 +1,32 @@
+<% include partials/header %>
+
+<div class="container container-fluid">
+  <h1 class="text-center">Settings</h1>
+  <label>Email Address</label>
+  <div class="input-group">
+    <!-- TODO: Swap out the form input for when editting -->
+    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+    <p class="form-control" type="email" name="email" required><%= user.email  %></p>
+    <span class="input-group-btn" id="basic-addon2">
+      <button type="button" name="editEmailButton" class="btn"><i class="fa fa-pencil"></i></button>
+    </span>
+  </div>
+  <label>Alias</label>
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon3"><i class="fa fa-user"></i></span>
+    <input class="form-control" type="text" name="username" placeholder="Mrs. Joe Biden" pattern="[A-z0-9,.\s]{0,35}">
+    <span class="input-group-btn" id="basic-addon4">
+      <button type="button" name="editAliasButton" class="btn"><i class="fa fa-pencil"></i></button>
+    </span>
+  </div>
+  <label>Password</label>
+  <div class="input-group">
+    <span class="input-group-addon" id="basic-addon5"><i class="fa fa-lock" aria-hidden="true"></i></span>
+    <input type="password" class="form-control" name="password" value="**********" readonly>
+    <span class="input-group-btn" id="basic-addon6">
+      <button type="button" name="resetPasswordButton" class="btn">Reset password</button>
+    </span>
+  </div>
+</div>
+
+<% include partials/footer %>
