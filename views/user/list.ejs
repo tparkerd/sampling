@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Email</th>
+        <th scope="col">Alias</th>
+        <th scope="col">Observations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach( (row) => { %>
+        <tr>
+          <td><%= row.email %></th>
+          <td><%= row.alias %></th>
+          <td><%= row.observations %></th>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+</div>
+
+<% include ../partials/footer %>
