@@ -28,11 +28,7 @@ router.post('/',
       .exists()
       .custom((value, { req }) => value === req.body.password)
 
-
   ], (req, res, next) => {
-    // console.log(req.body);
-    console.log(check().matches());
-    // Check that
     try {
       // Throw error if any input was invalid
       validationResult(req).throw()

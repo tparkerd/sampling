@@ -11,22 +11,13 @@ router.get('/', (req, res) => {
 
   let query = 'SELECT * FROM users;'
   connection.query(query, (err, rows) => {
-    if (err) {
-      return req.flash('error', err)
-    }
-
-    console.log(rows);
+    if (err) return req.flash('error', err)
 
     // Got data back
     if (rows.length) {
       return res.render('list', { data: rows })
     }
   })
-
-
-
-
-
 })
 
 module.exports = router

@@ -12,9 +12,9 @@
     <tbody>
       <% data.forEach( (row) => { %>
         <tr>
-          <td><%= row.email %></th>
-          <td><%= row.alias %></th>
-          <td><%= row.observations %></th>
+          <th scope="row"><%= row.email %></th>
+          <td><a href="/user/profile/<%= row.id %>"><%= row.alias %></a></td>
+          <td><%= row.observations %></td>
         </tr>
       <% }) %>
     </tbody>
