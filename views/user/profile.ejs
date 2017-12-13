@@ -12,6 +12,7 @@
   </div>
 
   <h5>Classifications</h5>
+  <% if (data.observations.length > 0) { %>
   <table class="table">
     <thead>
       <tr>
@@ -31,7 +32,9 @@
         <% }) %>
     </tbody>
   </table>
-
+  <% } else { %>
+    <h5>User hasn't evaluated any samples yet!</h5>
+  <% } %>
 
 </div>
 

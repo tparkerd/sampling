@@ -1,6 +1,8 @@
 <% include ../partials/header %>
 
 <div class="container">
+  <h5>History</h5>
+  <% if (data.length > 0) { %>
   <table class="table">
     <thead>
       <tr>
@@ -21,6 +23,9 @@
       <% }) %>
     </tbody>
   </table>
+  <% } else  { %>
+    <h5>No samples have been evaluated yet!</h5>
+  <% } %>
 </div>
 
 <% include ../partials/footer %>

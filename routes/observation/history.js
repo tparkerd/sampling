@@ -28,7 +28,6 @@ router.get('/', (req, res) => {
     if (rows.length) {
       // Provide a shortened version for the view
       for (let i in rows) {
-
         if (rows[i].contents.length > 85) {
           // Get the first space after the first 85 characters
           let indexOfSpace = rows[i].contents.indexOf(' ', 85)
@@ -37,11 +36,9 @@ router.get('/', (req, res) => {
         }
         else
           rows[i].shorttext = rows[i].contents
-
-          console.log('Text: ' + rows[i].shorttext);
       }
-      return res.render('history', { data: rows })
     }
+    return res.render('history', { data: rows })
   })
 })
 
