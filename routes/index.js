@@ -10,11 +10,7 @@ router.get('/', (req, res) => { res.render('index') })
 router.use('/user', require('./user'))
 router.use('/observation', helper.isAuthenticated, require('./observation'))
 
-
 // 404 Fallback routes
 router.all ('*', (req, res) => { res.render('404') })
-
-
-
 
 module.exports = router

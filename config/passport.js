@@ -41,6 +41,8 @@ module.exports = (passport) => {
           return done(null, false, req.flash('error', 'Email has been previously used.'))
         }
         else {
+          // If no alias was provided, assign the prefix of the email as the alias
+          if (req.body.alias === '') req.body.alias = req.body.email.split('@')[0]
           let newUserMysql = {
             email: email,
             password: bcrypt.hashSync(password, null, null),
@@ -50,6 +52,7 @@ module.exports = (passport) => {
 
           connection.query(insertQuery, [newUserMysql.email, newUserMysql.password, newUserMysql.alias], (err, rows) => {
             newUserMysql.id = rows.insertId
+            req.flash('success', 'Registration successful! Welcome!')
             return done(null, newUserMysql)
           })
         }
