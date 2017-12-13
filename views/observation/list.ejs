@@ -13,10 +13,9 @@
     <tbody>
       <% data.forEach( (row) => { %>
         <tr>
-          <th scope="row"><%= row.postId %></th>
-          <td><%= row.shorttext %></td>
-          <td><%= row.rating %></td>
-          <td><a href="/user/profile/<%= row.user_id %>"><%= row.user_alias %></a></td>
+          <th scope="row"><%= row.email %></th>
+          <td><%= row.alias %></td>
+          <td><%= row.observations %></td>
         </tr>
       <% }) %>
     </tbody>

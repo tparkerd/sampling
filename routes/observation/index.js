@@ -4,12 +4,8 @@ const router = require('express').Router(),
 
 // TODO: Actually pull a random observation from the samples
 
-router.get('/history', (req, res) => {
-  res.render('observation/history')
-})
+router.use('/history', require('./history.js'))
+router.use('/evaluate', require('./evaluate.js'))
 
-router.get('/evaluate', (req, res) => {
-  res.render('observation/evaluate')
-})
 
 module.exports = router
