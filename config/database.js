@@ -9,5 +9,6 @@ module.exports = {
     'password': process.env.DBPASS
   },
     'database': process.env.DBNAME,
-    'user_table': process.env.USERTABLE
+    'user_table': process.env.USERTABLE,
+    'classification_table': process.env.CLASSIFICATIONTABLE
 }
