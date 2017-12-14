@@ -4,7 +4,6 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Email</th>
         <th scope="col">Alias</th>
         <th scope="col">Observations</th>
       </tr>
@@ -12,7 +11,6 @@
     <tbody>
       <% data.forEach( (row) => { %>
         <tr>
-          <th scope="row"><%= row.email %></th>
           <td><a href="/user/profile/<%= row.id %>"><%= row.alias %></a></td>
           <td><%= row.observations %></td>
         </tr>
