@@ -14,3 +14,6 @@ router.get('/', (req, res) => {
 })
 
 module.exports = router
+,
+mysql      = require('mysql'),
+dbconfig   = require('../../config/database.js')
