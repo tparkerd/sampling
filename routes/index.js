@@ -7,7 +7,6 @@ const router = require('express').Router(),
 router.get('/', (req, res) => { res.render('index') })
 
 router.post('/postreceive', (req, res) => {
-	console.log(req.body)
 	return res.status(200).json({message: 'received message'})
 })
 
