@@ -64,8 +64,6 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', require('./routes'))
 
-
-// TODO: Figure out how to set the environment up!
 let port = process.env.PORT || 3000
 app.set('port', port)
 
