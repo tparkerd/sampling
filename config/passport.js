@@ -34,6 +34,7 @@ module.exports = (passport) => {
       connection.query('SELECT * FROM users WHERE email = ?', [email], (err, rows) => {
         if (err) {
           req.flash('error', 'There was an unknown error during registration process')
+          console.log(err);
           console.error(new Error('There was an error while trying to register a new user'))
           return done(err)
         }
