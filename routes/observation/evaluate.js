@@ -14,11 +14,8 @@ router.get('/', (req, res) => {
 
   let query = `SELECT *
               FROM posts p
-              INNER JOIN (SELECT id
-                          FROM posts
-                          WHERE CHAR_LENGTH(posts.selftext) > 0
-                          AND posts.ups > 100) AS foo
-              ON foo.id = p.id
+              WHERE content_text != ''
+              AND ups > 100
               GROUP BY RAND()
               LIMIT 1;
 
