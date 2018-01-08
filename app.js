@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // Dependencies
 const bodyParser      = require('body-parser'),
       methodOverride  = require('method-override'),
