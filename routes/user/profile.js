@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
   query = `SELECT COUNT(*) AS classificationCount
                FROM classifications c
                INNER JOIN reddit.posts p
-                ON p.id = c.sample_id
+                ON p._id = c.sample_id
                INNER JOIN users u
                 ON c.user_id = u.id
                WHERE u.id = ?
@@ -44,7 +44,7 @@ router.get('/:id', (req, res) => {
 
     // Set a fixed width of the selftext!
    query = `SELECT c.id AS postId,
-                        p.selftext AS contents,
+                        p.content_text AS contents,
                         u.alias AS user_alias,
                         u.id AS user_id,
                         CASE c.rating
@@ -56,7 +56,7 @@ router.get('/:id', (req, res) => {
                         c.rating AS rating
                  FROM classifications c
                  INNER JOIN reddit.posts p
-                  ON p.id = c.sample_id
+                  ON p._id = c.sample_id
                  INNER JOIN users u
                   ON c.user_id = u.id
                  WHERE u.id = ?
