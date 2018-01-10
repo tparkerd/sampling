@@ -13,12 +13,9 @@ router.get('/', (req, res) => {
   connection.query('USE reddit')
 
   let query = `SELECT *
-              FROM posts p
-              WHERE content_text != ''
-              AND ups > 100
+              FROM samples
               GROUP BY RAND()
               LIMIT 1;
-
               `
   connection.query(query, (err, rows) => {
     if (err) return req.flash('error', err)
