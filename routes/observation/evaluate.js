@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
 
   let query = `SELECT *
               FROM samples
-              GROUP BY RAND()
-              LIMIT 1;
+              ORDER BY RAND()
+              LIMIT 1
               `
   connection.query(query, (err, rows) => {
     if (err) return req.flash('error', err)
