@@ -51,7 +51,6 @@ Without any errors, you should see the following text in your terminal:
 `Server started and listening on port 3000.`
 
 ## To-dos
-- Create sample of actual data
 - Consider putting in graphs
 - Classify on more than just depressed or not, perhaps put flags for the symptoms of depression
 - Remove password being passed back to the client
