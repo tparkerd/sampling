@@ -1,7 +1,6 @@
 # sampling
-### Demo
+### [Demo](http://cop4935group19.ddns.net/)
 Token for registration is 'token'
-[http://cop4935group19.ddns.net/](http://cop4935group19.ddns.net/)
 
 ### Installation and Setup
 #### Step 0: Dependencies<sup>1</sup>
