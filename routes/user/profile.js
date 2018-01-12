@@ -3,7 +3,6 @@ const router     = require('express').Router(),
       path       = require('path'),
       mysql      = require('mysql'),
       dbconfig   = require('../../config/database.js'),
-      jsonexport = require('jsonexport'),
       csv        = require('csv-express')
 
 
