@@ -2,7 +2,9 @@
 const router     = require('express').Router(),
       path       = require('path'),
       mysql      = require('mysql'),
-      dbconfig   = require('../../config/database.js')
+      dbconfig   = require('../../config/database.js'),
+      jsonexport = require('jsonexport'),
+      csv        = require('csv-express')
 
 
 // NOTE: Consider using middleware to get all the data instead, or at least for
@@ -14,7 +16,6 @@ router.get('/:id', (req, res) => {
                FROM users
                WHERE id = ?
                `
-
   let data = {}
 
   // NOTE: consider escaping the req.param.id
@@ -85,7 +86,30 @@ router.get('/:id', (req, res) => {
   })
 })
 
-// TODO: Figure out how to view the current user's page
-// router.get('/', (req, res) => { res.render('profile') })
+router.get('/export/:id', (req, res) => {
+  // Connect and set database
+  let connection = mysql.createConnection(dbconfig.connection)
+  connection.query('USE classifier')
+
+  connection.query('USE classifier')
+  // Set a fixed width of the selftext!
+  let query = `SELECT *
+               FROM classifications c
+               INNER JOIN reddit.posts p
+                ON p._id = c.sample_id
+               INNER JOIN users u
+                ON c.user_id = u.id
+               WHERE u.id = ?
+               `
+    connection.query(query, [req.params.id], (err, rows) => {
+      if (err) return req.flash('error', err)
+
+      // Got data back
+      if (rows.length) {
+        let headers = { "Content-Disposition": 'attachment;filename=sample_data.csv' }
+        res.csv(rows, true, headers)
+      }
+    })
+})
 
 module.exports = router

@@ -13,7 +13,7 @@
 
   <h5>Classifications</h5>
   <% if (data.observations.length > 0) { %>
-  <button type="button" name="button" class="btn btn-outline-primary btn-sm"><i class="fa fa-table" aria-hidden="true"></i> Export to csv</button>
+  <a href="/user/profile/export/<%= data.user.id %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-table" aria-hidden="true"></i> Export to csv</a>
   <br>
   <br>
   <table class="table">
