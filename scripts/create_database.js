@@ -1,13 +1,12 @@
 const mysql    = require('mysql'),
-      dbconfig = require('../config/database.js')
+      dbconfig = require('./config/database.js')
 
 let connection = mysql.createConnection(dbconfig.connection)
 
 try {
   let query = 'CREATE DATABASE ' + dbconfig.database
   connection.query(query, (err, rows) => {
-    if (err) throw new Error(err)
-    console.log(dbconfig.database + ' was successfully created');
+    if (err) throw err
   })
 
   // User table
@@ -24,7 +23,6 @@ try {
     `
   connection.query(query, (err, rows) => {
     if (err) throw err
-    console.log( dbconfig.database + '.' + dbconfig.user_table + ' was successfully created');
   })
 
   // Samples / Observations
@@ -42,11 +40,10 @@ try {
     `
   connection.query(query, (err, rows) => {
     if (err) throw err
-    console.log( dbconfig.database + '.' + dbconfig.classification_table + ' was successfully created');
   })
-} catch (err) {
+  console.log('Success: Database created!')
+} catch (e) {
   console.log('Failed: Database was NOT created.')
-  console.log(err)
 } finally {
   connection.end()
 }
