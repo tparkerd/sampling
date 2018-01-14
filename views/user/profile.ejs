@@ -22,6 +22,7 @@
         <th scope="col">ID</th>
         <th scope="col">Content</th>
         <th scope="col">Rating</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -31,6 +32,10 @@
             <th scope="row"><%= row.postId %></th>
             <td><%= row.shorttext %></td>
             <td><%= row.rating %></td>
+            <td>
+              <a href="/observation/details/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
+              <a href="/observation/edit/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            </td>
           </tr>
         <% }) %>
     </tbody>

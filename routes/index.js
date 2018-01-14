@@ -7,8 +7,8 @@ const router = require('express').Router(),
 router.get('/', (req, res) => { res.render('index') })
 
 // Sub-routes
-router.use('/user', require('./user'))
 router.use('/observation', helper.isAuthenticated, require('./observation'))
+router.use('/user', require('./user'))
 
 // 404 Fallback routes
 router.all ('*', (req, res) => { res.render('404') })

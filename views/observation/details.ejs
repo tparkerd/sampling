@@ -1,5 +1,36 @@
 <% include ../partials/header %>
 
+<div class="container">
+  <h5>Details</h5>
+  <% if (data.info)  { %>
 
+    <p><%= data.info.content_text%></p>
+  <% } %>
+
+  <h5>History</h5>
+   <% if (data.evaluations.length > 0) { %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Rater</th>
+          <th scope="col">Notes</th>
+          <th scope="col">Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% data.evaluations.forEach( (row) => { %>
+            <tr>
+              <th scope="row"><%= row.rater %></th>
+              <td><% if (row.notes == '') { %>-<% } else { %> <%= row.notes %> <% } %></td>
+              <td><%= row.rating %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% } else { %>
+          <h5>Sample has not been evaluated yet!</h5>
+          <% } %>
+</div>
 
 <% include ../partials/footer %>

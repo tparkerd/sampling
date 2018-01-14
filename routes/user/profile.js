@@ -43,7 +43,6 @@ router.get('/:id', (req, res) => {
 
     connection.query('USE classifier')
 
-    // Set a fixed width of the selftext!
    query = `SELECT c.id AS postId,
                         p.content_text AS contents,
                         u.alias AS user_alias,
