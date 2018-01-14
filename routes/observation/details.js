@@ -31,12 +31,16 @@ router.get('/:id', (req, res) => {
       return res.render('observation/details', { data: { info: {}, evaluations: {} } })
     }
 
-    if (rows.length > 0) {
+    // Check if there is info on the sample
+    if (rows[0].length > 0) {
       results = {}
       results.info = rows[0][0]
       results.info.averageRating = rows[2][0].mean
       results.evaluations = rows[1]
       return res.render('observation/details', { data: results })
+    } else {
+      req.flash('error', 'Sample does not exist')
+      return res.render('index')
     }
   })
 })
