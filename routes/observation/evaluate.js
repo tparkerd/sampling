@@ -4,30 +4,46 @@ const router = require('express').Router(),
       dbconfig   = require('../../config/database.js'),
       {check, validationResult} = require('express-validator/check')
 
-
-// TODO: Change this to pull from a smaller sample size
-//       As is, it is far to slow for quick classification
 router.get('/', (req, res) => {
   // Connect and set database
   let connection = mysql.createConnection(dbconfig.connection)
-  connection.query('USE reddit')
-
-  let query = `SELECT *
-              FROM samples
-              ORDER BY RAND()
-              LIMIT 1
-              `
+  let query = `SELECT s._id AS postId FROM reddit.samples s`
   connection.query(query, (err, rows) => {
-    if (err) return req.flash('error', err)
+    if (err) {
+      req.flash('error', 'Unknown error occurred while accessing database.')
+      return res.render('index')
+    }
 
     // Got data back
     if (rows.length) {
-      return res.render('observation/evaluate', { data: rows[0] })
+      // Build url for redirect based on the s._id using a random number
+      let randomIndex = Math.floor(Math.random() * rows.length)
+      let randomId = rows[randomIndex].postId
+      let url = '/observation/evaluate/' + randomId
+      return res.redirect(url)
     }
   })
 })
 
-router.post('/', [
+router.get('/:id', (req, res) => {
+  let results = []
+  let connection = mysql.createConnection(dbconfig.connection)
+  let query = `SELECT * FROM reddit.samples s WHERE s._id = ?`
+  connection.query(query, [req.params.id], (err, rows) => {
+    if (err) {
+      req.flash('error', 'Unknown error occurred while accessing database.')
+      return res.render('index')
+    }
+
+    if (rows.length) {
+      results = rows[0]
+      results.json = JSON.stringify(rows[0], null, 2)
+    }
+    return res.render('observation/evaluate', { data: results })
+  })
+})
+
+router.post('/:id', [
   check('rating', 'A rating must be selected.')
     .exists()
 ], (req, res) => {
@@ -36,23 +52,25 @@ router.post('/', [
 
     // Connect and set database
     let connection = mysql.createConnection(dbconfig.connection)
-    connection.query('USE classifier')
-
-    let query = `INSERT INTO classifications(sample_id, user_id, rating, notes)
+    let query = `INSERT INTO classifier.classifications(sample_id, user_id, rating, notes)
                  VALUES(?, ?, ?, ?)`
     let values = [ req.body.sample_id,
                    req.user.id,
                    req.body.rating,
-                   req.body.notes
-                 ]
-
-    console.log(values);
-
+                   req.body.notes ]
 
     connection.query(query, values, (err, rows) => {
-      if (err) return req.flash('error', err)
+      if (err) {
+        req.flash('error', err)
+        let url = '/observation/evaluate/' + req.body.sample_id
+        return res.render(url)
+      }
 
-      req.flash('success', 'Sample classified.')
+      let message = ''
+      message += 'Sample #'
+      message += req.body.sample_id
+      message += ' was successfully evaluated.'
+      req.flash('success alert-dismissible alert', message)
       return res.redirect('/observation/evaluate')
     })
 
@@ -64,11 +82,11 @@ router.post('/', [
       req.flash('error', errors[key].msg)
     })
 
-    // Go back to registration form
-    return res.redirect('/observation/evaluate')
+    // Go back to evaluation form
+    return res.redirect('/observation/evaluate/')
   }
-
 })
+
 
 router.put('/', (req, res) => {
   // Connect and set database

@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
 
     connection.query('USE classifier')
 
-   query = `SELECT c.id AS postId,
+   query = `SELECT p._id AS postId,
                         p.content_text AS contents,
                         u.alias AS user_alias,
                         u.id AS user_id,
