@@ -1,5 +1,4 @@
 <% include ../partials/header %>
-
 <div class="container">
   <table class="table">
     <thead>
@@ -12,7 +11,7 @@
       <% data.forEach( (row) => { %>
         <tr>
           <td><a href="/user/profile/<%= row.id %>"><%= row.alias %></a></td>
-          <td><%= row.observations %></td>
+          <td><%= row.observationCount %></td>
         </tr>
       <% }) %>
     </tbody>
