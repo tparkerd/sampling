@@ -6,9 +6,19 @@
 <% Object.keys(messages).forEach(function (type) { %>
   <% messages[type].forEach(function (message) { %>
     <% if (type === 'error') { %>
-    <div class="alert alert-danger"><%= message %></div>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <%= message %>
+    </div>
     <% } else { %>
-      <div class="alert alert-<%= type %>"><%= message %></div>
+      <div class="alert alert-<%= type %>">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <%= message %>
+      </div>
     <% } %>
   <% }) %>
 <% }) %>
