@@ -3,28 +3,10 @@ const router = require('express').Router(),
       mysql      = require('mysql'),
       dbconfig   = require('../../config/database.js')
 
-
-
 router.get('/:id', (req, res) => {
   dbconfig.connection.multipleStatements = true
   let connection = mysql.createConnection(dbconfig.connection)
   let query
-  query = `SELECT *
-           FROM classifier.classifications c
-           INNER JOIN reddit.posts p
-            ON p._id = c.sample_id
-           WHERE c.id = ?;
-
-           SELECT c.id, c.rating, c.notes, u.alias AS rater, u.id AS user_id
-           FROM classifier.classifications c
-           INNER JOIN classifier.users u
-            ON u.id = c.user_id
-           WHERE c.id = ?;
-
-           SELECT AVG(c.rating) AS mean
-           FROM classifier.classifications c
-           WHERE c.id = ?;
-           `
   query = `
           SELECT *
           FROM reddit.posts p
@@ -66,6 +48,5 @@ router.get('/:id', (req, res) => {
     }
   })
 })
-
 
 module.exports = router
