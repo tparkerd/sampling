@@ -9,7 +9,13 @@ router.get('/', (req, res) => {
   let connection = mysql.createConnection(dbconfig.connection)
   connection.query('USE ' + dbconfig.database)
 
-  let query = 'SELECT * FROM users;'
+  let query = `
+              SELECT u.id, u.alias, count(c.id) as observationCount
+              FROM classifier.users u
+              INNER JOIN classifier.classifications c
+                ON u.id = c.user_id
+              GROUP BY u.id
+              `
   connection.query(query, (err, rows) => {
     if (err) return req.flash('error', err)
 

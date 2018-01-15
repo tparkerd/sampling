@@ -1,6 +1,10 @@
 <% include partials/header %>
 
 <div class="container container-fluid">
+
+  <div class="alert alert-danger">
+    <h4>NOT YET FUNCTIONAL</h4>
+  </div>
   <h1 class="text-center">Settings</h1>
   <label>Email Address</label>
   <div class="input-group">
@@ -14,7 +18,7 @@
   <label>Alias</label>
   <div class="input-group">
     <span class="input-group-addon" id="basic-addon3"><i class="fa fa-user"></i></span>
-    <input class="form-control" type="text" name="username" placeholder="Mrs. Joe Biden" pattern="[A-z0-9,.\s]{0,35}">
+    <p class="form-control" type="text" name="username" required><%= user.alias  %></p>
     <span class="input-group-btn" id="basic-addon4">
       <button type="button" name="editAliasButton" class="btn"><i class="fa fa-pencil"></i></button>
     </span>

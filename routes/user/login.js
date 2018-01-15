@@ -11,9 +11,7 @@ router.post('/', passport.authenticate('local-login', {
   successRedirect: '/',
   failureRedirect: '/user/login',
   failureFlash: true
-}),
-
-)
+}))
 
 router.post('/', passport.authenticate('local-login', {
           successRedirect : '/', // redirect to the secure profile section
@@ -21,8 +19,6 @@ router.post('/', passport.authenticate('local-login', {
           failureFlash : true // allow flash messages
   }),
       function(req, res) {
-          console.log("hello");
-
           if (req.body.remember) {
             req.session.cookie.maxAge = 1000 * 60 * 3;
           } else {
