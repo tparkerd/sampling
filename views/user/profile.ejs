@@ -34,7 +34,7 @@
             <td><%= row.rating %></td>
             <td>
               <a href="/observation/details/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
-              <a href="/observation/edit/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+              <a href="/observation/evaluate/<%= row.postId %>" class="btn btn-outline-primary btn-sm disabled"><i class="fa fa-pencil" aria-hidden="true"></i></a>
             </td>
           </tr>
         <% }) %>

@@ -7,6 +7,16 @@ const router = require('express').Router(),
 router.get('/', (req, res) => {
   // Connect and set database
   let connection = mysql.createConnection(dbconfig.connection)
+
+  ////////////////////
+
+  // TODO: Check if it's already been evaluated, and if so, pull data and
+  //       fill in the values
+
+  ////////////////////
+
+
+
   let query = `SELECT s._id AS postId FROM reddit.samples s`
   connection.query(query, (err, rows) => {
     if (err) {
