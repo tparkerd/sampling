@@ -4,7 +4,7 @@
   <div class="container row">
     <% if (data.info)  { %>
     <h5>Details</h5>
-      <table class="table">
+      <table class="table ">
         <thead>
           <tr>
             <th scope="col">Attribute</th>
@@ -19,7 +19,7 @@
           <tr>
             <th role="row">URL</th>
             <td>
-              <a href="<%= data.info.permalink %>"><%= data.info.permalink %></a>
+              <a class="badge badge-primary" href="<%= data.info.permalink %>">link</a>
             </td>
           </tr>
           <tr>
