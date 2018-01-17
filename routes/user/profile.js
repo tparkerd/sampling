@@ -96,17 +96,17 @@ router.get('/export/:id', (req, res) => {
                        p.content_text AS contents,
                        u.alias AS user_alias,
                        u.id AS user_id,
-                       CASE c.ratingText
+                       c.rating AS rating,
+                       CASE c.rating
                          WHEN 0 THEN 'absent'
                          WHEN 1 THEN 'mild'
                          WHEN 2 THEN 'moderate'
                          WHEN 3 THEN 'severe'
-                         ELSE 'unknown' END AS ratingText,
-                       c.rating AS rating
-                FROM classifications c
+                         ELSE 'unknown' END AS ratingText
+                FROM classifier.classifications c
                 INNER JOIN reddit.posts p
                  ON p._id = c.sample_id
-                INNER JOIN users u
+                INNER JOIN classifier.users u
                  ON c.user_id = u.id
                 WHERE u.id = ?
                `
