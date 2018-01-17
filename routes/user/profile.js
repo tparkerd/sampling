@@ -92,13 +92,23 @@ router.get('/export/:id', (req, res) => {
 
   connection.query('USE classifier')
   // Set a fixed width of the selftext!
-  let query = `SELECT *
-               FROM classifications c
-               INNER JOIN reddit.posts p
-                ON p._id = c.sample_id
-               INNER JOIN users u
-                ON c.user_id = u.id
-               WHERE u.id = ?
+  let query = `SELECT c.id AS postId,
+                       p.content_text AS contents,
+                       u.alias AS user_alias,
+                       u.id AS user_id,
+                       CASE c.ratingText
+                         WHEN 0 THEN 'absent'
+                         WHEN 1 THEN 'mild'
+                         WHEN 2 THEN 'moderate'
+                         WHEN 3 THEN 'severe'
+                         ELSE 'unknown' END AS ratingText,
+                       c.rating AS rating
+                FROM classifications c
+                INNER JOIN reddit.posts p
+                 ON p._id = c.sample_id
+                INNER JOIN users u
+                 ON c.user_id = u.id
+                WHERE u.id = ?
                `
     connection.query(query, [req.params.id], (err, rows) => {
       if (err) return req.flash('error', err)
