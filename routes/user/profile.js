@@ -92,12 +92,10 @@ router.get('/export/:id', (req, res) => {
 
   connection.query('USE classifier')
   // Set a fixed width of the selftext!
-  let query = `SELECT c.sample_id AS postId,
+  let query = `SELECT c.id AS postId,
                        p.content_text AS contents,
-                       p.title AS titleText,
                        u.alias AS user_alias,
                        u.id AS user_id,
-                       c.rating AS rating,
                        CASE c.ratingText
                          WHEN 0 THEN 'absent'
                          WHEN 1 THEN 'mild'
