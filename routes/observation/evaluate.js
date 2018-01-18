@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
   ////////////////////
 
 
-
   let query = `SELECT s._id AS postId FROM reddit.samples s`
   connection.query(query, (err, rows) => {
     if (err) {

@@ -50,6 +50,9 @@ Without any errors, you should see the following text in your terminal:
 `Server started and listening on port 3000.`
 
 ## To-dos
+- Add constraint to classifications table so that the user can only submit one
+- evaluation per sample, so it would be `CONSTRAINT UNIQUE (sample_id, user_id)`
+- `ALTER TABLE classifications ADD CONSTRAINT UNIQUE (sample_id, user_id)`
 - Switch auto-deploy over to two separate scripts, `install.sh` and `update.sh`
 - Consider putting in graphs
 - Classify on more than just depressed or not, perhaps put flags for the symptoms of depression
