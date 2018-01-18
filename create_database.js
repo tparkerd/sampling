@@ -28,7 +28,7 @@ connection.query(`
     user_id INT NOT NULL,
     rating INT NOT NULL,
     notes TEXT,
-    type_of_post VARCHAR(25) NOT NULL,
+    type_of_post VARCHAR(25),
     PRIMARY KEY (id),
     CONSTRAINT UNIQUE (sample_id, user_id),
     UNIQUE INDEX id_UNIQUE2 (id ASC)
