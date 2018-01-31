@@ -86,12 +86,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.get('/export/:id', (req, res) => {
-  // Connect and set database
   let connection = mysql.createConnection(dbconfig.connection)
-  connection.query('USE classifier')
-
-  connection.query('USE classifier')
-  // Set a fixed width of the selftext!
   let query = `SELECT c.id AS postId,
                        p.content_text AS contents,
                        u.alias AS user_alias,
