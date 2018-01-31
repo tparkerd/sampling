@@ -8,16 +8,20 @@ router.get('/', (req, res) => {
   // Connect and set database
   let connection = mysql.createConnection(dbconfig.connection)
 
-  ////////////////////
+  let query = `SELECT s._id AS postId
+               FROM reddit.samples s
+               WHERE s._id NOT IN (
+                 SELECT p._id
+                 FROM classifier.classifications c
+                 INNER JOIN reddit.posts p
+                 ON p._id = c.sample_id
+                 INNER JOIN classifier.users u
+                 ON c.user_id = u.id
+                 WHERE u.id = ?
+                 )
+               `
 
-  // TODO: Check if it's already been evaluated, and if so, pull data and
-  //       fill in the values
-
-  ////////////////////
-
-
-  let query = `SELECT s._id AS postId FROM reddit.samples s`
-  connection.query(query, (err, rows) => {
+  connection.query(query, [req.user.id], (err, rows) => {
     if (err) {
       req.flash('error', 'Unknown error occurred while accessing database.')
       return res.render('index')
