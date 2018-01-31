@@ -1,25 +1,37 @@
 <% include ../partials/header %>
 
 <div class="container">
+  <h5>Sample List</h5>
+  <% if (data.length > 0) { %>
+  <a href="/observation/list/export/" class="btn btn-outline-primary btn-sm"><i class="fa fa-table" aria-hidden="true"></i> Export to csv</a>
+  <br>
+  <br>
   <table class="table">
     <thead>
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Content</th>
         <th scope="col">Rating</th>
-        <th scope="col">Rater</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
       <% data.forEach( (row) => { %>
         <tr>
-          <th scope="row"><%= row.email %></th>
-          <td><%= row.alias %></td>
-          <td><%= row.observations %></td>
+          <th scope="row"><a href="/observation/evaluate/<%= row.postId %>"><%= row.postId %></a></th>
+          <td><%= row.shorttext %></td>
+          <td><%= row.avgRating %></td>
+          <td>
+            <a href="/observation/details/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
+            <a href="/observation/evaluate/<%= row.postId %>" class="btn btn-outline-primary btn-sm disabled"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+          </td>
         </tr>
       <% }) %>
     </tbody>
   </table>
+  <% } else  { %>
+    <h5>No samples were found!</h5>
+  <% } %>
 </div>
 
 <% include ../partials/footer %>
