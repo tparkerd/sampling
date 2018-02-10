@@ -50,17 +50,15 @@ Without any errors, you should see the following text in your terminal:
 `Server started and listening on port 3000.`
 
 ## To-dos
-- Add constraint to classifications table so that the user can only submit one
-- evaluation per sample, so it would be `CONSTRAINT UNIQUE (sample_id, user_id)`
-- `ALTER TABLE classifications ADD CONSTRAINT UNIQUE (sample_id, user_id)`
-- Switch auto-deploy over to two separate scripts, `install.sh` and `update.sh`
-- Consider putting in graphs
+- Add explanation on how samples are annotated
+- Fix duplicate evaluations
+  - Add constraint to classifications table so that the user can only submit one
+  - evaluation per sample, so it would be `CONSTRAINT UNIQUE (sample_id, user_id)`
+  - `ALTER TABLE classifications ADD CONSTRAINT UNIQUE (sample_id, user_id)`
+- Add graph(s) indicating the spread of how samples are annotated
 - Classify on more than just depressed or not, perhaps put flags for the symptoms of depression
-- Remove password being passed back to the client
-- Post Details: ID, full text, view page
-  Be able to pull up samples by ID, get the full text, details and possible rate it themselves.
-  It would be nice to be able to link it to someone else to also evaluate.
-
-- Reset Password Setup
-1. Create form asking for email
-2. Create token for that email the user table, so this might require that the token is generated and saved in the user table along with an expiration date
+- Remove hashed password being passed back to the client (Omit from SQL)
+- Change ID to reddit.post.id for exporting to CSV on user profile page
+- Implement password reset functionality
+- Rename tool to Annotator
+- Implement update/edit of annotations
