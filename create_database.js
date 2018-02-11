@@ -18,8 +18,6 @@ connection.query(`
     )
   `)
 
-// Samples / Observations
-
 // Evaluations / Classifications
 connection.query(`
   CREATE TABLE ${dbconfig.database}.${dbconfig.classification_table} (
@@ -29,6 +27,7 @@ connection.query(`
     rating INT NOT NULL,
     notes TEXT,
     type_of_post VARCHAR(25),
+    last_edited TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     CONSTRAINT UNIQUE (sample_id, user_id),
     UNIQUE INDEX id_UNIQUE2 (id ASC)

@@ -51,32 +51,37 @@ router.get('/:id', (req, res) => {
     if (rows.length) {
       results = rows[0]
       results.json = JSON.stringify(rows[0], null, 2)
+      return res.render('observation/evaluate', { data: results })
+    } else {
+      req.flash('error', 'Sample #' + req.params.id + ' does not exist.')
+      return res.redirect('/')
     }
-    return res.render('observation/evaluate', { data: results })
   })
 })
 
 router.post('/:id', [
   check('rating', 'A rating must be selected.')
     .exists()
-], (req, res) => {
+  ], (req, res) => {
   try {
     validationResult(req).throw()
 
     // Connect and set database
     let connection = mysql.createConnection(dbconfig.connection)
     let query = `INSERT INTO classifier.classifications(sample_id, user_id, rating, notes)
-                 VALUES(?, ?, ?, ?)`
+                 VALUES(?, ?, ?, ?) ON DUPLICATE KEY UPDATE rating = ?`
     let values = [ req.body.sample_id,
                    req.user.id,
                    req.body.rating,
-                   req.body.notes ]
+                   req.body.notes,
+                   req.body.rating
+                 ]
 
     connection.query(query, values, (err, rows) => {
       if (err) {
-        req.flash('error', err)
+        req.flash('error', err.toString())
         let url = '/observation/evaluate/' + req.body.sample_id
-        return res.render(url)
+        return res.redirect(url)
       }
 
       let message = ''
@@ -99,7 +104,6 @@ router.post('/:id', [
     return res.redirect('/observation/evaluate/')
   }
 })
-
 
 router.put('/', (req, res) => {
   // Connect and set database
