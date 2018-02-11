@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   let connection = mysql.createConnection(dbconfig.connection)
 
   let query = `SELECT s._id AS postId,
-                      s.content_text AS contents,
+                      s.content_text AS txt,
                       AVG(c.rating) AS avgRating
                FROM reddit.samples s
                LEFT JOIN classifier.classifications c
@@ -29,14 +29,14 @@ router.get('/', (req, res) => {
           if (rows.length) {
             // Provide a shortened version for the view
             for (let i in rows) {
-              if (rows[i].contents.length > 85) {
+              if (rows[i].txt.length > 85) {
                 // Get the first space after the first 85 characters
-                let cutoffIndex = rows[i].contents.indexOf(' ', 85)
+                let cutoffIndex = rows[i].txt.indexOf(' ', 85)
                 if (cutoffIndex > 120) cutoffIndex = 65
-                rows[i].shorttext = rows[i].contents.substring(0, cutoffIndex) + '...'
+                rows[i].shorttext = rows[i].txt.substring(0, cutoffIndex) + '...'
               }
               else
-                rows[i].shorttext = rows[i].contents
+                rows[i].shorttext = rows[i].txt
             }
             data.observations = rows
           }
@@ -49,8 +49,8 @@ router.get('/export/', (req, res) => {
   // Connect and set database
   let connection = mysql.createConnection(dbconfig.connection)
   let query = `SELECT s._id AS postId,
-                      s.content_text AS contents,
-                      AVG(c.rating) AS avgRating
+                      s.content_text AS txt,
+                      AVG(c.rating) AS rating
                FROM reddit.samples s
                LEFT JOIN classifier.classifications c
                 ON s._id = c.sample_id

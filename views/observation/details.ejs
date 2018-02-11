@@ -36,30 +36,34 @@
   </div>
 
   <div class="container row">
-    <h5>History</h5>
-    <% if (data.evaluations.length > 0) { %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Rater</th>
-            <th scope="col">Notes</th>
-            <th scope="col">Rating</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <% data.evaluations.forEach( (row) => { %>
-              <tr>
-                <th scope="row"><%= row.rater %></th>
-                <td><% if (row.notes == '') { %>-<% } else { %> <%= row.notes %> <% } %></td>
-                <td><%= row.rating %></td>
-              </tr>
-              <% }) %>
-            </tbody>
-          </table>
-          <% } else { %>
-            <h5>Sample has not been evaluated yet!</h5>
-            <% } %>
+    <div class="container row">
+      <h5>History</h5>
+    </div>
+    <div class="container row">
+      <% if (data.evaluations.length > 0) { %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Rater</th>
+              <th scope="col">Notes</th>
+              <th scope="col">Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <% data.evaluations.forEach( (row) => { %>
+                <tr>
+                  <th scope="row"><%= row.rater %></th>
+                  <td><% if (row.notes == '') { %>-<% } else { %> <%= row.notes %> <% } %></td>
+                  <td><%= row.rating %></td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+      <% } else { %>
+        <p><h5>Sample has not been evaluated yet!</h5></p>
+      <% } %>
+    </div>
   </div>
 </div>
 

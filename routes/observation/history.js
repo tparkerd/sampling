@@ -7,9 +7,9 @@ const router     = require('express').Router(),
 router.get('/', (req, res) => {
   let connection = mysql.createConnection(dbconfig.connection)
   let query = `SELECT p._id AS postId,
-                      p.content_text AS contents,
-                      u.alias AS user_alias,
-                      u.id AS user_id,
+                      p.content_text AS txt,
+                      u.alias as user_alias,
+                      u.id as user_id,
                       c.rating AS rating
                FROM classifier.classifications c
                INNER JOIN reddit.posts p
@@ -24,14 +24,14 @@ router.get('/', (req, res) => {
     if (rows.length) {
       // Provide a shortened version for the view
       for (let i in rows) {
-        if (rows[i].contents.length > 85) {
+        if (rows[i].txt.length > 85) {
           // Get the first space after the first 85 characters
-          let indexOfSpace = rows[i].contents.indexOf(' ', 85)
-          let phrase = rows[i].contents.substring(0, indexOfSpace)
+          let indexOfSpace = rows[i].txt.indexOf(' ', 85)
+          let phrase = rows[i].txt.substring(0, indexOfSpace)
           rows[i].shorttext = phrase + '...'
         }
         else
-          rows[i].shorttext = rows[i].contents
+          rows[i].shorttext = rows[i].txt
       }
     }
     return res.render('history', { data: rows })
@@ -41,10 +41,8 @@ router.get('/', (req, res) => {
 router.get('/export/', (req, res) => {
   // Connect and set database
   let connection = mysql.createConnection(dbconfig.connection)
-  let query = `SELECT c.id AS postId,
-                      p.content_text AS contents,
-                      u.alias AS user_alias,
-                      u.id AS user_id,
+  let query = `SELECT p._id AS postId,
+                      p.content_text AS txt,
                       c.rating AS rating
                FROM classifier.classifications c
                INNER JOIN reddit.posts p

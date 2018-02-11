@@ -9,21 +9,21 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Content</th>
-        <th scope="col">Rating</th>
-        <th scope="col">Actions</th>
+        <th class="w-5" scope="col">ID</th>
+        <th class="w-50" scope="col">Content</th>
+        <th class="w-30" scope="col">Rating</th>
+        <th class="w-15" scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
       <% data.forEach( (row) => { %>
         <tr>
-          <th scope="row"><a href="/observation/evaluate/<%= row.postId %>"><%= row.postId %></a></th>
-          <td><%= row.shorttext %></td>
+          <th scope="row"><%= row.postId %></th>
+          <td title="<%= row.txt %>"><%= row.shorttext %></td>
           <td><%= row.avgRating %></td>
           <td>
-            <a href="/observation/details/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
-            <a href="/observation/evaluate/<%= row.postId %>" class="btn btn-outline-primary btn-sm disabled"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a title="View Details" href="/observation/details/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
+            <a title="Evaluate" href="/observation/evaluate/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></a>
           </td>
         </tr>
       <% }) %>
