@@ -51,7 +51,3 @@ Without any errors, you should see the following text in your terminal:
 
 ## To-dos
 - Add explanation on how samples are annotated
-- Fix duplicate evaluations
-  - Add constraint to classifications table so that the user can only submit one
-  - evaluation per sample, so it would be `CONSTRAINT UNIQUE (sample_id, user_id)`
-  - `ALTER TABLE classifications ADD CONSTRAINT UNIQUE (sample_id, user_id)`
