@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   let query = `
               SELECT u.id, u.alias, count(c.id) as observationCount
               FROM classifier.users u
-              INNER JOIN classifier.classifications c
+              LEFT JOIN classifier.classifications c
                 ON u.id = c.user_id
               GROUP BY u.id
               `
