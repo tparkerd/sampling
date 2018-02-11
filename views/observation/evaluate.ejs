@@ -4,6 +4,7 @@
   <div class="form-group">
       <label>Select how severe you think the author of the following text suffers from depression:</label>
       <div class="lead container sample-text">
+        <a class="btn btn-primary btn-sm pull-right" href="/observation/details/<%= data._id %>">View Details</a>
         <% if (data.title) { %>
           <h4><%= data.title %></h4>
         <% } %>
@@ -11,20 +12,20 @@
       </div>
 
       <div class="btn-group d-flex" role="group" data-toggle="buttons">
-        <label class="btn btn-success w-100">
+        <label class="btn btn-absent w-100">
           <input type="radio" name="rating" id="option1" value="0"> Absent
         </label>
-        <label class="btn btn-secondary w-100">
+        <label class="btn btn-mild w-100">
           <input type="radio" name="rating" id="option2" value="1"> Mild
         </label>
-        <label class="btn btn-warning w-100">
+        <label class="btn btn-moderate w-100">
           <input type="radio" name="rating" id="option3" value="2"> Moderate
         </label>
-        <label class="btn btn-danger w-100">
+        <label class="btn btn-severe w-100">
           <input type="radio" name="rating" id="option4" value="3"> Severe
         </label>
-        <input type="text" name="sample_id" id="sample_id" value="<%= data._id %>" hidden>
       </div>
+  <input type="text" name="sample_id" id="sample_id" value="<%= data._id %>" hidden>
   </div>
   <div class="form-group">
       <label>Notes</label>

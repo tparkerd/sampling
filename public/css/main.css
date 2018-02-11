@@ -12,3 +12,45 @@ nav {
 #footer {
   margin-top: 5rem;
 }
+
+
+.btn-absent { background-color: rgba(209, 209, 209, 1); }
+.btn-mild { background-color: rgba(240, 250, 126, 1); }
+.btn-moderate { background-color: rgba(255, 177, 87, 1); }
+.btn-severe { background-color: rgba(255, 91, 91, 1); }
+
+.btn-absent:hover,
+.btn-absent:focus,
+.btn-absent:active,
+.btn-absent.active,
+.open > .dropdown-toggle.btn-absent {
+  background-color: rgba(191, 191, 191, 1);
+  box-shadow: 0 0 0 0.2rem rgba(191, 191, 191, 0.5);
+}
+
+.btn-mild:hover,
+.btn-mild:focus,
+.btn-mild:active,
+.btn-mild.active,
+.open > .dropdown-toggle.btn-mild {
+  background-color: rgba(240, 255, 79, 1);
+  box-shadow: 0 0 0 0.2rem rgba(240, 255, 79, 0.5);
+}
+
+.btn-moderate:hover,
+.btn-moderate:focus,
+.btn-moderate:active,
+.btn-moderate.active,
+.open > .dropdown-toggle.btn-moderate {
+  background-color: rgba(255, 166, 62, 1);
+  box-shadow: 0 0 0 0.2rem rgba(255, 166, 62, 0.5);
+}
+
+.btn-severe:hover,
+.btn-severe:focus,
+.btn-severe:active,
+.btn-severe.active,
+.open > .dropdown-toggle.btn-severe {
+  background-color: rgba(245, 59, 59, 1);
+  box-shadow: 0 0 0 0.2rem rgba(245, 59, 59, 0.5);
+}
