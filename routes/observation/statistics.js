@@ -67,8 +67,6 @@ router.get('/', (req, res) => {
       data.sampleCounts[i] = data.samples[Object.keys(data.samples)[i]].length
     }
 
-    console.log(data);
-
     // Count the number of samples evaluted by each user
     for (let i in data.users.samples) {
       data.users.counts[i - 1] = data.users.samples[i].length
