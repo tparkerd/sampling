@@ -1,0 +1,126 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <h5>Statistics</h5>
+  <% if (data) { %>
+    <div class="container row">
+      <div class="container col-lg-6">
+        <canvas id="myChart"></canvas>
+      </div>
+      <div class="container col-lg-6">
+        <canvas id="myChart2"></canvas>
+      </div>
+    </div>
+  <% } else  { %>
+    <h5>No samples have been evaluated yet!</h5>
+  <% } %>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js" charset="utf-8"></script>
+<script>
+var data = {
+    labels: [<%- data.users.names %>],
+    datasets: [{
+        data: [<%- data.users.counts %>],
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+    }]
+}
+var dataSample = {
+  labels: ['Absent', 'Mild', 'Moderate', 'Severe'],
+  datasets: [{
+      label: '# of Ratings',
+      data: [ <%- data.sampleCounts %> ],
+      backgroundColor: [
+          'rgba(201, 201, 201, 0.8)',
+          'rgba(233, 250, 47, 0.8)',
+          'rgba(255, 166, 62, 0.8)',
+          'rgba(245, 59, 59, 0.8)'
+      ],
+      hoverBorderColor: [
+        'rgb(255, 255, 255)',
+        'rgb(255, 255, 255)',
+        'rgb(255, 255, 255)',
+        'rgb(255, 255, 255)'
+      ],
+      borderWidth: 2,
+  }]
+}
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: data,
+    options: {
+      title: {
+        display: true,
+        text: '# of Evaluations per User'
+      },
+      scales: {
+          xAxes: [{
+            stacked: true
+          }],
+          yAxes: [{
+            stacked: true,
+              ticks: {
+                  beginAtZero:true
+              }
+          }]
+      },
+      legend: {
+        display: false
+      }
+    }
+});
+var ctx = document.getElementById("myChart2").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: dataSample,
+    options: {
+      cutoutPercentage: 40,
+      responsive: true,
+      legend: {
+        position: 'bottom',
+      },
+      title: {
+        display: true,
+        text: '# of Ratings per Classification'
+      },
+      animation: {
+        animateScale: true,
+        animateRotate: true
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+              return previousValue + currentValue;
+            });
+            var currentValue = dataset.data[tooltipItem.index];
+            var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+            return precentage + "%" + ' (' + currentValue + ' out of ' + dataset.data.reduce((a,b) => a + b, 0) + ')';
+          }
+        }
+      }
+    }
+})
+</script>
+
+
+
+<% include ../partials/footer %>
