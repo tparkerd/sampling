@@ -21,19 +21,23 @@
 var data = {
     labels: [<%- data.users.names %>],
         datasets: [{
-          data: Array(3).fill().map(Math.random).map(x => x * 100).map(Math.floor),
+          label: 'Absent',
+          data: [<%- data.samples.absent %>],
           backgroundColor: 'rgba(218, 218, 218, 1)',
           hoverBackgroundColor: 'rgba(201, 201, 201, 1)'
         }, {
-          data: Array(3).fill().map(Math.random).map(x => x * 100).map(Math.floor),
+          label: 'Mild',
+          data: [<%- data.samples.mild %>],
           backgroundColor: 'rgba(255, 242, 125, 1)',
           hoverBackgroundColor: 'rgba(255, 233, 139, 1)'
         }, {
-          data: Array(3).fill().map(Math.random).map(x => x * 100).map(Math.floor),
+          label: 'Moderate',
+          data: [<%- data.samples.moderate %>],
           backgroundColor: 'rgba(255, 172, 103, 1)',
           hoverBackgroundColor: 'rgba(255, 149, 82, 1)'
         }, {
-          data: Array(3).fill().map(Math.random).map(x => x * 100).map(Math.floor),
+          label: 'Severe',
+          data: [<%- data.samples.severe %>],
           backgroundColor: 'rgba(255, 92, 92, 1)',
           hoverBackgroundColor: 'rgba(255, 65, 65, 1)'
         }],
@@ -68,6 +72,9 @@ var myChart = new Chart(ctx, {
         display: true,
         text: '# of Evaluations per User',
       },
+      legend: {
+        position: 'bottom'
+      },
       tooltips: {
         callbacks: {
           label: function(tooltipItem, data) {
@@ -100,9 +107,6 @@ var myChart = new Chart(ctx, {
               }
           }]
       },
-      legend: {
-        display: false
-      }
     }
 });
 
@@ -115,7 +119,7 @@ var myChart = new Chart(ctx, {
       cutoutPercentage: 40,
       responsive: true,
       legend: {
-        position: 'bottom',
+        position: 'bottom'
       },
       title: {
         display: true,
