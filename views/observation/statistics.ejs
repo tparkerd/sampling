@@ -20,26 +20,24 @@
 <script>
 var data = {
     labels: [<%- data.users.names %>],
-    datasets: [{
-        data: [<%- data.users.counts %>],
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-        ],
+        datasets: [{
+          data: Array(3).fill().map(Math.random).map(x => x * 100).map(Math.floor),
+          backgroundColor: 'rgba(218, 218, 218, 1)',
+          hoverBackgroundColor: 'rgba(201, 201, 201, 1)'
+        }, {
+          data: Array(3).fill().map(Math.random).map(x => x * 100).map(Math.floor),
+          backgroundColor: 'rgba(255, 242, 125, 1)',
+          hoverBackgroundColor: 'rgba(255, 233, 139, 1)'
+        }, {
+          data: Array(3).fill().map(Math.random).map(x => x * 100).map(Math.floor),
+          backgroundColor: 'rgba(255, 172, 103, 1)',
+          hoverBackgroundColor: 'rgba(255, 149, 82, 1)'
+        }, {
+          data: Array(3).fill().map(Math.random).map(x => x * 100).map(Math.floor),
+          backgroundColor: 'rgba(255, 92, 92, 1)',
+          hoverBackgroundColor: 'rgba(255, 65, 65, 1)'
+        }],
         borderWidth: 1
-    }]
 }
 var dataSample = {
   labels: ['Absent', 'Mild', 'Moderate', 'Severe'],
@@ -68,7 +66,28 @@ var myChart = new Chart(ctx, {
     options: {
       title: {
         display: true,
-        text: '# of Evaluations per User'
+        text: '# of Evaluations per User',
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            let individualTotals = new Array(data.datasets[0].data.length).fill(0)
+            // Get the individual's total contributions
+            // For each level of severity..
+            for (let i = 0; i < data.datasets.length; i++) {
+              // For each person's count...
+              for (let j = 0; j < data.datasets[i].data.length; j++) {
+                // Add that level of severity to their respective total
+                individualTotals[j] += data.datasets[i].data[j]
+              }
+            }
+
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var currentValue = dataset.data[tooltipItem.index];
+            var precentage = Math.floor(((currentValue/individualTotals[tooltipItem.index]) * 100)+0.5);
+            return precentage + "%" + ' (' + currentValue + ' of ' + individualTotals[tooltipItem.index] + ')';
+          }
+        }
       },
       scales: {
           xAxes: [{
@@ -86,6 +105,8 @@ var myChart = new Chart(ctx, {
       }
     }
 });
+
+
 var ctx = document.getElementById("myChart2").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'doughnut',
@@ -113,7 +134,7 @@ var myChart = new Chart(ctx, {
             });
             var currentValue = dataset.data[tooltipItem.index];
             var precentage = Math.floor(((currentValue/total) * 100)+0.5);
-            return precentage + "%" + ' (' + currentValue + ' out of ' + dataset.data.reduce((a,b) => a + b, 0) + ')';
+            return precentage + "%" + ' (' + currentValue + ' of ' + dataset.data.reduce((a,b) => a + b, 0) + ')';
           }
         }
       }
