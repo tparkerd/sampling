@@ -8,6 +8,24 @@ router.get('/', (req, res) => {
   // Connect and set database
   let connection = mysql.createConnection(dbconfig.connection)
 
+  // First try to pull from a bin
+  let query2 = `
+                SELECT s._id AS postId
+                FROM reddit.samples s
+                  INNER JOIN classifier.bins b
+                    ON s._id = b.sample_id
+                WHERE s._id NOT IN (
+                  SELECT p._id
+                  FROM classifier.classifications c
+                  INNER JOIN reddit.posts p
+                  ON p._id = c.sample_id
+                  INNER JOIN classifier.users u
+                  ON c.user_id = u.id
+                  WHERE u.id = ?
+                  )
+                `
+
+
   let query = `SELECT s._id AS postId
                FROM reddit.samples s
                WHERE s._id NOT IN (

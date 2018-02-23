@@ -10,5 +10,6 @@ module.exports = {
   },
     'database': process.env.DBNAME,
     'user_table': process.env.USERTABLE,
-    'classification_table': process.env.CLASSIFICATIONTABLE
+    'classification_table': process.env.CLASSIFICATIONTABLE,
+    'bin_table': process.env.BINTABLE
 }

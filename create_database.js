@@ -34,6 +34,19 @@ connection.query(`
     )
   `)
 
+  // Bins to assign samples to users
+  connection.query(`
+    CREATE TABLE  ${dbconfig.database}.${dbconfig.bin_table} (
+      id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      user_id INT NOT NULL,
+      sample_id INT NOT NULL,
+      assigned_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      last_edited DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+      PRIMARY KEY (id),
+      UNIQUE INDEX id_UNIQUE (id, user_id, sample_id)
+    )
+    `)
+
 console.log('Success: Database created!')
 
 connection.end()
