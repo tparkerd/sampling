@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
                 ON p._id = c.sample_id
                INNER JOIN classifier.users u
                 ON c.user_id = u.id
+               ORDER BY c.last_edited DESC
                `
   connection.query(query, (err, rows) => {
     if (err) return req.flash('error', err)
