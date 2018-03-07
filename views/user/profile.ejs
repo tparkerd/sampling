@@ -34,7 +34,8 @@
             <td><%= row.rating %></td>
             <td>
               <a title="View Details" href="/observation/details/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
-              <a title="Evaluate" href="/observation/evaluate/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+              <a title="Evaluate" href="/observation/v1/annotate/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i><sub>1</sub></a>
+              <a title="Evaluate" href="/observation/v2/annotate/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i><sub>2</sub></a>
             </td>
           </tr>
         <% }) %>

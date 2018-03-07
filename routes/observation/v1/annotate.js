@@ -1,35 +1,20 @@
 const router = require('express').Router(),
       path   = require('path'),
       mysql      = require('mysql'),
-      dbconfig   = require('../../config/database.js'),
+      dbconfig   = require('../../../config/database.js'),
       {check, validationResult} = require('express-validator/check')
 
 router.get('/', (req, res) => {
   // Connect and set database
   let connection = mysql.createConnection(dbconfig.connection)
 
-// Original
-  // let query = `SELECT s._id AS postId
-  //              FROM reddit.samples s
-  //              WHERE s._id NOT IN (
-  //                SELECT p._id
-  //                FROM classifier.classifications c
-  //                INNER JOIN reddit.posts p
-  //                ON p._id = c.sample_id
-  //                INNER JOIN classifier.users u
-  //                ON c.user_id = u.id
-  //                WHERE u.id = ?
-  //                )
-  //              `
-
   let query = `SELECT s._id AS postId
                FROM reddit.samples s
                WHERE s._id NOT IN (
-                 SELECT c.sample_id
+                 SELECT p._id
                  FROM classifier.classifications c
-                 INNER JOIN classifier.users u
-                 ON c.user_id = u.id
-                 WHERE u.id = ?
+                 INNER JOIN reddit.posts p
+                 ON p._id = c.sample_id
                  )
                `
 
@@ -45,7 +30,7 @@ router.get('/', (req, res) => {
       // Build url for redirect based on the s._id using a random number
       let randomIndex = Math.floor(Math.random() * rows.length)
       let randomId = rows[randomIndex].postId
-      let url = '/observation/evaluate/' + randomId
+      let url = '/observation/v1/annotate/' + randomId
       return res.redirect(url)
     }
   })
@@ -64,7 +49,7 @@ router.get('/:id', (req, res) => {
     if (rows.length) {
       results = rows[0]
       results.json = JSON.stringify(rows[0], null, 2)
-      return res.render('observation/evaluate', { data: results })
+      return res.render('observation/v1/annotate', { data: results })
     } else {
       req.flash('error', 'Sample #' + req.params.id + ' does not exist.')
       return res.redirect('/')
@@ -73,7 +58,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/:id', [
-  check('rating', 'A rating must be selected.')
+  check('rating', 'An annotation must be selected.')
     .exists()
   ], (req, res) => {
   try {
@@ -93,7 +78,7 @@ router.post('/:id', [
     connection.query(query, values, (err, rows) => {
       if (err) {
         req.flash('error', err.toString())
-        let url = '/observation/evaluate/' + req.body.sample_id
+        let url = '/observation/v1/annotate/' + req.body.sample_id
         return res.redirect(url)
       }
 
@@ -102,7 +87,7 @@ router.post('/:id', [
       message += req.body.sample_id
       message += ' was successfully evaluated.'
       req.flash('success alert-dismissible alert', message)
-      return res.redirect('/observation/evaluate')
+      return res.redirect('/observation/v1/annotate')
     })
 
   } catch (err) {
@@ -114,7 +99,7 @@ router.post('/:id', [
     })
 
     // Go back to evaluation form
-    return res.redirect('/observation/evaluate/')
+    return res.redirect('/observation/v1/annotate/' + req.body.sample_id)
   }
 })
 

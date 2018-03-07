@@ -1,0 +1,425 @@
+<% include ../partials/header %>
+
+<form class="container" action="" method="POST">
+  <div class="form-group">
+      <label>Select how severe you think the author of the following text suffers from depression:</label>
+      <div class="lead container sample-text">
+        <a class="btn btn-primary btn-sm pull-right" href="/observation/details/<%= data._id %>">View Details</a>
+        <% if (data.title) { %>
+          <h4><%= data.title %></h4>
+        <% } %>
+        <%= data.content_text %>
+      </div>
+
+
+
+      <h5>Sadness</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="sadness" id="option1" value="-1" tabindex="1" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="sadness" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="sadness" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="sadness" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="sadness" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Pessimism</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="pessimism" id="option1" value="-1" tabindex="2" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="pessimism" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="pessimism" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="pessimism" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="pessimism" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Past Failure</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="past_failure" id="option1" value="-1" tabindex="3" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="past_failure" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="past_failure" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="past_failure" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="past_failure" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Loss of Pleasure</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="loss_of_pleasure" id="option1" value="-1" tabindex="4" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="loss_of_pleasure" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="loss_of_pleasure" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="loss_of_pleasure" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="loss_of_pleasure" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Guilty Feelings</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="guilty_feelings" id="option1" value="-1" tabindex="5" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="guilty_feelings" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="guilty_feelings" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="guilty_feelings" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="guilty_feelings" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Punishment Feelings</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="punishment_feelings" id="option1" value="-1" tabindex="6" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="punishment_feelings" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="punishment_feelings" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="punishment_feelings" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="punishment_feelings" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Self-dislike</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="self_dislike" id="option1" value="-1" tabindex="7" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="self_dislike" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="self_dislike" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="self_dislike" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="self_dislike" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Self-criticalness</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="self_criticalness" id="option1" value="-1" tabindex="8" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="self_criticalness" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="self_criticalness" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="self_criticalness" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="self_criticalness" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Suicidal thoughts/ideation</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="suicidal_thoughts" id="option1" value="-1" tabindex="9" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="suicidal_thoughts" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="suicidal_thoughts" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="suicidal_thoughts" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="suicidal_thoughts" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Crying</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="crying" id="option1" value="-1" tabindex="10" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="crying" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="crying" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="crying" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="crying" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Agitation</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="agitation" id="option1" value="-1" tabindex="11" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="agitation" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="agitation" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="agitation" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="agitation" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Loss of Interest</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="loss_of_interest" id="option1" value="-1" tabindex="12" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="loss_of_interest" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="loss_of_interest" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="loss_of_interest" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="loss_of_interest" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Indecisiveness</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="indecisiveness" id="option1" value="-1" tabindex="13" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="indecisiveness" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="indecisiveness" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="indecisiveness" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="indecisiveness" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Worthlessness</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="worthlessness" id="option1" value="-1" tabindex="14" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="worthlessness" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="worthlessness" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="worthlessness" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="worthlessness" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Loss of Energy</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="loss_of_energy" id="option1" value="-1" tabindex="15" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="loss_of_energy" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="loss_of_energy" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="loss_of_energy" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="loss_of_energy" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Changes in Sleeping Pattern</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="changes_in_sleeping_pattern" id="option1" value="-1" tabindex="16" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="changes_in_sleeping_pattern" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="changes_in_sleeping_pattern" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="changes_in_sleeping_pattern" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="changes_in_sleeping_pattern" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Irritability</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="irritability" id="option1" value="-1" tabindex="17" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="irritability" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="irritability" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="irritability" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="irritability" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Changes in Appetite</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="changes_in_appetite" id="option1" value="-1" tabindex="18" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="changes_in_appetite" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="changes_in_appetite" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="changes_in_appetite" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="changes_in_appetite" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Concentration Difficulty</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="concentration_difficulty" id="option1" value="-1" tabindex="19" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="concentration_difficulty" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="concentration_difficulty" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="concentration_difficulty" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="concentration_difficulty" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Tiredness or Fatigue</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="tiredness_or_fatigue" id="option1" value="-1" tabindex="20" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="tiredness_or_fatigue" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="tiredness_or_fatigue" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="tiredness_or_fatigue" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="tiredness_or_fatigue" id="option5" value="3"> Severe
+          </label>
+        </div>
+      <h5>Loss of Interest in Sex</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-na w-100 active">
+            <input type="radio" name="loss_of_interest_in_sex" id="option1" value="-1" tabindex="21" checked="checked"> N/A
+          </label>
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="loss_of_interest_in_sex" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="loss_of_interest_in_sex" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="loss_of_interest_in_sex" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="loss_of_interest_in_sex" id="option5" value="3"> Severe
+          </label>
+        </div>
+
+      <h5>General Personal Annotation</h5>
+      <div class="btn-group d-flex" role="group" data-toggle="buttons">
+          <label class="btn btn-absent w-100">
+            <input type="radio" name="personal_opinion" id="option2" value="0"> Absent
+          </label>
+          <label class="btn btn-mild w-100">
+            <input type="radio" name="personal_opinion" id="option3" value="1"> Mild
+          </label>
+          <label class="btn btn-moderate w-100">
+            <input type="radio" name="personal_opinion" id="option4" value="2"> Moderate
+          </label>
+          <label class="btn btn-severe w-100">
+            <input type="radio" name="personal_opinion" id="option5" value="3"> Severe
+          </label>
+        </div>
+
+
+  <input type="text" name="sample_id" id="sample_id" value="<%= data._id %>" hidden>
+  </div>
+  <div class="form-group">
+      <label>Notes</label>
+      <textarea type="textarea" rows="3" class="form-control" id="notes" name="notes"></textarea>
+  </div>
+  <br>
+  <div class="d-flex justify-content-around">
+    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    <a href="/observation/v2/annotate" class="btn btn-secondary btn-lg">Skip</a>
+  </div>
+</form>
+
+<% include ../partials/footer %>

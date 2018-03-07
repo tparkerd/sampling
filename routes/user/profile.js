@@ -59,6 +59,7 @@ router.get('/:id', (req, res) => {
                  INNER JOIN classifier.users u
                   ON c.user_id = u.id
                  WHERE u.id = ?
+                 ORDER BY c.last_edited DESC
                  `
 
     data.observations = []
