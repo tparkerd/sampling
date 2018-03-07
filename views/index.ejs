@@ -1,17 +1,28 @@
 <% include partials/header %>
 
 <div class="container">
-  <h4>Landing Page</h4>
-  <h5>Evaluate</h5>
-  <p>Presents a random sample text for the user to classify.</p>
+  <p><a href="https://docs.google.com/document/d/1qCwP7L7egymNfjOCkmM67RBYjNRIIEyxIGDg9M9fy4g/"> View annotation guidelines</a></p>
+
+  <h5>Annotate (v1)</h5>
+  <p>Presents a random sample text not previously annotated and allows the user to directly select the annotation for the sample.</p>
+  <h5>Annotate (v2)</h5>
+  <p>Presents a random sample text not previously annotated and calculated the overall annotation given the user's select of severity levels for each symptom of depression.</p>
+  <ul>
+    <li>N/A -- symptom is missing from sample</li>
+    <li>Absent -- symptom is present but does not contribute to depression</li>
+    <li>Mild -- symptom is present and has low level of severity</li>
+    <li>Moderate -- symptom is present and has medium level of severity</li>
+    <li>Severe -- symptom is present and has high level of severity</li>
+  </ul>
   <h5>History</h5>
-  <p>Shows all the previously evaluated samples, evaluator, and rating.</p>
+  <p>Shows all the previously evaluated samples, evaluator, and annotation, ordered from most to least recent.</p>
   <h5>Samples</h5>
   <p>List of all available samples that can be evaluated.</p>
   <h5>Users</h5>
-  <p>Shows all users and links to their public profile and number samples/oversations evaluated.</p>
-  <h5>Stats</h5>
+  <p>Shows all users and links to their public profile and number samples evaluated.</p>
+  <h5>Statistics</h5>
   <p>Shows general statistics on evaluated samples.</p>
+  <p>I may later include the numbers on individual symptoms and how weight changes the calculated annotation.</p>
   <h5>Profile</h5>
   <p>Shows personal profile with personal history.</p>
 </div>
