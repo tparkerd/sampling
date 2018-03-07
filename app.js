@@ -35,7 +35,9 @@ app.engine('html', require('ejs').renderFile)
 app.set('views', [
   path.join(__dirname, 'views'),
   path.join(__dirname, 'views', 'user/'),
-  path.join(__dirname, 'views', 'observation')
+  path.join(__dirname, 'views', 'observation'),
+  path.join(__dirname, 'views', 'observation', 'v1'),
+  path.join(__dirname, 'views', 'observation', 'v2')
 ])
 app.set('view engine', 'ejs')
 
