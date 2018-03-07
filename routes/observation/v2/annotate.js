@@ -101,12 +101,16 @@ router.post('/:id', [
 
       if (percentage >= 0 && percentage <= 16) {
         results.annotation = 0
+        results.annotationName = 'Absent'
       } else if (percentage > 16 && percentage <= 31) {
         results.annotation = 1
+        results.annotationName = 'Mild'
       } else if (percentage > 31 && percentage <= 48) {
         results.annotation = 2
+        results.annotationName = 'Moderate'
       } else {
         results.annotation = 3
+        results.annotationName = 'Severe'
       }
 
       results.percentage = percentage
@@ -162,7 +166,7 @@ router.post('/:id', [
       let message = ''
       message += 'Sample #'
       message += req.body.sample_id
-      message += ` was successfully evaluated (Calculated annotation: ${results.percentage.toFixed(2)}%).`
+      message += ` was successfully evaluated. Calculated annotation: ${results.annotationName} (${results.percentage.toFixed(2)}%).`
       req.flash('success alert-dismissible alert', message)
       return res.redirect('/observation/v2/annotate')
     })
