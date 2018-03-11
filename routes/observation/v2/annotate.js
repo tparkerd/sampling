@@ -125,11 +125,38 @@ router.post('/:id', [
     let connection = mysql.createConnection(dbconfig.connection)
     let query = `INSERT INTO classifier.classifications(sample_id, user_id, rating, notes, sadness,
     pessimism, past_failure, loss_of_pleasure, guilty_feelings, punishment_feelings, self_dislike, self_criticalness, suicidal_thoughts, crying, agitation, loss_of_interest, indecisiveness, worthlessness, loss_of_energy, changes_in_sleeping_pattern, irritability, changes_in_appetite, concentration_difficulty, tiredness_or_fatigue, loss_of_interest_in_sex, personal_opinion)
-                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE rating = ?`
+                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 ON DUPLICATE KEY UPDATE
+                 rating = ?
+                 sadness = ?,
+                 pessimism = ?, past_failure = ?, loss_of_pleasure = ?, guilty_feelings = ?, punishment_feelings = ?, self_dislike = ?, self_criticalness = ?, suicidal_thoughts = ?, crying = ?, agitation = ?, loss_of_interest = ?, indecisiveness = ?, worthlessness = ?, loss_of_energy = ?, changes_in_sleeping_pattern = ?, irritability = ?, changes_in_appetite = ?, concentration_difficulty = ?, tiredness_or_fatigue = ?, loss_of_interest_in_sex = ?, personal_opinion = ?`
     let values = [ req.body.sample_id,
                    req.user.id,
                    req.body.rating,
                    req.body.notes,
+                   req.body.rating,
+                   req.body.sadness,
+                   req.body.pessimism,
+                   req.body.past_failure,
+                   req.body.loss_of_pleasure,
+                   req.body.guilty_feelings,
+                   req.body.punishment_feelings,
+                   req.body.self_dislike,
+                   req.body.self_criticalness,
+                   req.body.suicidal_thoughts,
+                   req.body.crying,
+                   req.body.agitation,
+                   req.body.loss_of_interest,
+                   req.body.indecisiveness,
+                   req.body.worthlessness,
+                   req.body.loss_of_energy,
+                   req.body.changes_in_sleeping_pattern,
+                   req.body.irritability,
+                   req.body.changes_in_appetite,
+                   req.body.concentration_difficulty,
+                   req.body.tiredness_or_fatigue,
+                   req.body.loss_of_interest_in_sex,
+                   req.body.personal_opinion,
                    req.body.rating,
                    req.body.sadness,
                    req.body.pessimism,
