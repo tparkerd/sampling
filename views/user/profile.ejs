@@ -13,7 +13,8 @@
 
   <h5>Classifications</h5>
   <% if (data.observations.length > 0) { %>
-  <a href="/user/profile/export/<%= data.user.id %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-table" aria-hidden="true"></i> Export to csv</a>
+  <a href="/user/profile/export/csv/<%= data.user.id %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-table" aria-hidden="true"></i> Export to csv</a>
+  <a href="/user/profile/export/json/<%= data.user.id %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-file-code-o" aria-hidden="true"></i> Export to json</a>
   <br>
   <br>
   <table class="table">

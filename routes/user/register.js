@@ -1,13 +1,11 @@
 'use strict'
-const router     = require('express').Router(),
-      path       = require('path'),
-      mysql      = require('mysql'),
-      dbconfig   = require('../../config/database.js'),
-      passport   = require('passport'),
-      nodemailer = require('nodemailer'),
-      {check, validationResult} = require('express-validator/check')
+const router = require('express').Router(),
+  path = require('path'),
+  passport = require('passport'),
+  nodemailer = require('nodemailer'),
+  {check, validationResult} = require('express-validator/check')
 
-router.get('/', (req, res) => { res.render('register') })
+router.get('/', (req, res, next) => { res.render('register') })
 
 router.post('/',
   [
@@ -39,19 +37,19 @@ router.post('/',
         successRedirect: '/',
         failureRedirect: '/user/register',
         failureFlash: true
-      })(req, res)
+      })(req, res, next)
     } catch (err) {
       // At least one error was encountered
       const errors = err.mapped()
 
       // Send the errors back to the client
-      Object.keys(errors).map( (key, index) => {
+      Object.keys(errors).map((key, index) => {
         req.flash('error', errors[key].msg)
       })
 
       // Go back to registration form
       return res.redirect('/user/register')
     }
-})
+  })
 
 module.exports = router

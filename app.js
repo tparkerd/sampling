@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
 // Dependencies
-const bodyParser      = require('body-parser'),
-      methodOverride  = require('method-override'),
-      localStrategy   = require('passport-local'),
-      passport        = require('passport'),
-      flash           = require('connect-flash'),
-      path            = require('path'),
-      nodemailer      = require('nodemailer'),
-      express         = require('express'),
-      morgan          = require('morgan'),
-      fs              = require('fs'),
-      sessions        = require('express-session'),
-      env             = require('dotenv')
+const bodyParser = require('body-parser'),
+  methodOverride = require('method-override'),
+  localStrategy = require('passport-local'),
+  passport = require('passport'),
+  flash = require('connect-flash'),
+  path = require('path'),
+  nodemailer = require('nodemailer'),
+  express = require('express'),
+  morgan = require('morgan'),
+  fs = require('fs'),
+  sessions = require('express-session'),
+  env = require('dotenv')
 
 let app = express()
 
@@ -49,8 +49,16 @@ app.use(sessions({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-app.use( (req, res, next) => {
+app.use((req, res, next) => {
   res.locals.user = req.user || null
+  next()
+})
+
+// Limit request types
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
   next()
 })
 

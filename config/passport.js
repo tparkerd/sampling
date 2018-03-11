@@ -1,90 +1,86 @@
 const LocalStrategy = require('passport-local').Strategy,
-      mysql         = require('mysql'),
-      bcrypt        = require('bcrypt-nodejs'),
-      dbconfig      = require('./database.js')
-
-
-let connection    = mysql.createConnection(dbconfig.connection)
-
-// Declare database used
-connection.query('USE ' + dbconfig.database)
+  mysql = require('mysql'),
+  bcrypt = require('bcrypt-nodejs'),
+  pool = require('./mysql-pool.js')
 
 module.exports = (passport) => {
+  pool.getConnection((err, connection) => {
+    if (err) {
+      connection.release()
+      throw err
+    }
 
-  // Passport session setup
-  passport.serializeUser( (user, done) => {
-    done(null, user.id)
-  })
-
-  passport.deserializeUser( (id, done) => {
-    connection.query('SELECT * FROM users WHERE id = ?', [id], (err, rows) => {
-      done(err, rows[0])
+    // Passport session setup
+    passport.serializeUser((user, done) => {
+      done(null, user.id)
     })
-  })
 
-  // Registration
-  passport.use(
-    'local-register',
-    new LocalStrategy({
-      usernameField: 'email',
-      passwordField: 'password',
-      passReqToCallback: true
-    },
-    (req, email, password, done) => {
-      connection.query('SELECT * FROM users WHERE email = ?', [email], (err, rows) => {
-        if (err) {
-          req.flash('error', 'There was an unknown error during registration process')
-          console.error(new Error('There was an error while trying to register a new user'))
-          return done(err)
-        }
-        if (rows.length) {
-          return done(null, false, req.flash('error', 'Email has been previously used.'))
-        }
-        else {
-          // If no alias was provided, assign the prefix of the email as the alias
-          if (req.body.alias === '') req.body.alias = req.body.email.split('@')[0]
-          let newUserMysql = {
-            email: email,
-            password: bcrypt.hashSync(password, null, null),
-            alias: req.body.alias
-          }
-          let insertQuery = 'INSERT INTO users (email, password, alias) VALUES (?, ?, ?)'
-
-          connection.query(insertQuery, [newUserMysql.email, newUserMysql.password, newUserMysql.alias], (err, rows) => {
-            newUserMysql.id = rows.insertId
-            req.flash('success', 'Registration successful! Welcome!')
-            return done(null, newUserMysql)
-          })
-        }
+    passport.deserializeUser((id, done) => {
+      connection.query('SELECT * FROM classifier.users WHERE id = ?', [id], (err, rows) => {
+        done(err, rows[0])
       })
     })
-  )
 
-  // Log in
-  passport.use(
-    'local-login',
-    new LocalStrategy({
-      usernameField: 'email',
-      passwordField: 'password',
-      passReqToCallback: true
-    },
-    (req, email, password, done) => {
-      connection.query('SELECT * FROM users WHERE email = ?', [email], (err, rows) => {
-        if (err) {
-          console.error(new Error('An error occurred during registration.'))
-          return done(err)
+    // Registration
+    passport.use(
+      'local-register',
+      new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+      },
+      (req, email, password, done) => {
+        // If no alias was provided, assign the prefix of the email as the alias
+        if (req.body.alias === '') req.body.alias = req.body.email.split('@')[0]
+        let newUserMysql = {
+          email: email,
+          password: bcrypt.hashSync(password, null, null),
+          alias: req.body.alias
         }
-        if (!rows.length) {
-          return done(null, false, req.flash('warning', 'User does not exist.'))
-        }
+        let insertQuery = 'INSERT INTO classifier.users (email, password, alias) VALUES (?, ?, ?)'
+        let params = [newUserMysql.email, newUserMysql.password, newUserMysql.alias]
+        connection.query(insertQuery, params, (err, results, fields) => {
+          if (err) {
+            let message = err.sqlMessage
+            if (err.code == 'ER_DUP_ENTRY') {
+              message = 'An account has already been registered under the email.'
+            }
+            return done(null, false, message)
+          }
+          newUserMysql.id = results.insertId
+          req.flash('success', 'Registration successful! Welcome!')
+          return done(null, newUserMysql)
+        })
+      })
+    )
 
-      if (!bcrypt.compareSync(password, rows[0].password)) {
-        console.log('Password was incorrect. Login failed.')
-        return done(null, false, req.flash('warning', 'Oops! Wrong password.'))
-      }
+    // Log in
+    passport.use(
+      'local-login',
+      new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+      },
+      (req, email, password, done) => {
+        connection.query('SELECT * FROM classifier.users WHERE email = ?', [email], (err, results, fields) => {
+          if (err) {
+            console.error(new Error('An error occurred during login.'))
+            return done(null, false, req.flash('An error occurred during login.'))
+          }
+          if (!results.length) {
+            return done(null, false, req.flash('warning', 'User does not exist.'))
+          }
 
-      // Login successful
-      return done(null, rows[0], req.flash('success', 'You have successfully logged in.'))
-    })
-  })
-)}
+          if (!bcrypt.compareSync(password, results[0].password)) {
+            console.log('Password was incorrect. Login failed.')
+            return done(null, false, req.flash('warning', 'Oops! Wrong password.'))
+          }
+
+          // Login successful
+          return done(null, results[0], req.flash('success', 'You have successfully logged in.'))
+        })
+      })
+    )
+  }) // end of the pool connection
+}
