@@ -25,7 +25,11 @@ router.get('/', (req, res) => {
 
       // Got data back
       if (rows.length) {
-        return res.render('list', { data: rows })
+        let total = 0
+        for (let r in rows) {
+          total += rows[r].observationCount
+        }
+        return res.render('list', { data: rows, total: total })
       }
     })
   })
