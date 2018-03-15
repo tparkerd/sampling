@@ -66,6 +66,7 @@ module.exports = (passport) => {
         connection.query('SELECT * FROM classifier.users WHERE email = ?', [email], (err, results, fields) => {
           if (err) {
             console.error(new Error('An error occurred during login.'))
+            console.error(err)
             return done(null, false, req.flash('An error occurred during login.'))
           }
           if (!results.length) {
