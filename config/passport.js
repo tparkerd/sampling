@@ -17,6 +17,10 @@ module.exports = (passport) => {
 
     passport.deserializeUser((id, done) => {
       connection.query('SELECT * FROM classifier.users WHERE id = ?', [id], (err, rows) => {
+        if (err) {
+          console.error(err)
+          return done(null, false, req.flash('An error occurred by trying to deserialize user.'))
+        }
         done(err, rows[0])
       })
     })
