@@ -20,9 +20,9 @@
     <tbody>
       <% data.forEach( (row) => { %>
         <tr>
-          <th scope="row"><%= row.postId %></th>
-          <td title="<%= row.txt %>"><%= row.shorttext %></td>
-          <td><%= row.rating %></td>
+          <th scope="row"><%= row.id %></th>
+          <td title="<%= row.document %>"><%= row.shorttext %></td>
+          <td><%= row.severity %></td>
           <td><a href="/user/profile/<%= row.user_id %>"><%= row.user_alias %></a></td>
           <td>
             <a title="View Details" href="/observation/details/<%= row.postId %>" class="btn btn-outline-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>

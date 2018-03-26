@@ -10,11 +10,11 @@ router.get('/', (req, res) => {
       req.flash('error', 'Unknow error was encountered by accessing database.')
       return res.redirect('/')
     }
-    let query = `SELECT p._id AS postId,
-    p.content_text AS txt,
+    let query = `SELECT p._id AS id,
+    p.content_text AS document,
     u.alias as user_alias,
     u.id as user_id,
-    c.rating AS rating
+    c.rating AS severity
     FROM classifier.classifications c
     INNER JOIN reddit.posts p
     ON p._id = c.sample_id
@@ -30,13 +30,13 @@ router.get('/', (req, res) => {
       if (rows.length) {
         // Provide a shortened version for the view
         for (let i in rows) {
-          if (rows[i].txt.length > 85) {
+          if (rows[i].document.length > 85) {
             // Get the first space after the first 85 characters
-            let indexOfSpace = rows[i].txt.indexOf(' ', 85)
-            let phrase = rows[i].txt.substring(0, indexOfSpace)
+            let indexOfSpace = rows[i].document.indexOf(' ', 85)
+            let phrase = rows[i].document.substring(0, indexOfSpace)
             rows[i].shorttext = phrase + '...'
           } else {
-            rows[i].shorttext = rows[i].txt
+            rows[i].shorttext = rows[i].document
           }
         }
       }
@@ -52,9 +52,32 @@ router.get('/export/csv', (req, res) => {
       req.flash('error', 'Unknow error was encountered by accessing database.')
       return res.redirect('/')
     }
-    let query = `SELECT p._id AS postId,
-    p.content_text AS txt,
-    c.rating AS rating
+    let query = `SELECT p._id AS id,
+    p.content_text AS document,
+    c.rating AS severity,
+    DATE_FORMAT(FROM_UNIXTIME(UNIX_TIMESTAMP(TIMESTAMP(c.last_edited))), '%Y-%m-%d %H:%i:%s') as edit_time,
+    c.sadness,
+    c.pessimism,
+    c.past_failure,
+    c.loss_of_pleasure,
+    c.guilty_feelings,
+    c.punishment_feelings,
+    c.self_dislike,
+    c.self_criticalness,
+    c.suicidal_thoughts,
+    c.crying,
+    c.agitation,
+    c.loss_of_interest,
+    c.indecisiveness,
+    c.worthlessness,
+    c.loss_of_energy,
+    c.changes_in_sleeping_pattern,
+    c.irritability,
+    c.changes_in_appetite,
+    c.concentration_difficulty,
+    c.tiredness_or_fatigue,
+    c.loss_of_interest_in_sex,
+    c.personal_opinion
     FROM classifier.classifications c
     INNER JOIN reddit.posts p
     ON p._id = c.sample_id
@@ -81,9 +104,32 @@ router.get('/export/json', (req, res) => {
       req.flash('error', 'Unknow error was encountered by accessing database.')
       return res.redirect('/')
     }
-    let query = `SELECT p._id AS postId,
-    p.content_text AS txt,
-    c.rating AS rating
+    let query = `SELECT p._id AS id,
+    p.content_text AS document,
+    c.rating AS severity,
+    DATE_FORMAT(FROM_UNIXTIME(UNIX_TIMESTAMP(TIMESTAMP(c.last_edited))), '%Y-%m-%d %H:%i:%s') as edit_time,
+    c.sadness,
+    c.pessimism,
+    c.past_failure,
+    c.loss_of_pleasure,
+    c.guilty_feelings,
+    c.punishment_feelings,
+    c.self_dislike,
+    c.self_criticalness,
+    c.suicidal_thoughts,
+    c.crying,
+    c.agitation,
+    c.loss_of_interest,
+    c.indecisiveness,
+    c.worthlessness,
+    c.loss_of_energy,
+    c.changes_in_sleeping_pattern,
+    c.irritability,
+    c.changes_in_appetite,
+    c.concentration_difficulty,
+    c.tiredness_or_fatigue,
+    c.loss_of_interest_in_sex,
+    c.personal_opinion
     FROM classifier.classifications c
     INNER JOIN reddit.posts p
     ON p._id = c.sample_id
