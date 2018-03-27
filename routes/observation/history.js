@@ -143,6 +143,7 @@ router.get('/export/json', (req, res) => {
       // Got data back
       if (rows.length) {
         let headers = { 'Content-Disposition': 'attachment;filename=sample_data.json', 'Content-Type': 'application/json' }
+        rows = { documents: rows }
         return res.json(rows)
       }
     })
