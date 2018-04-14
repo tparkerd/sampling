@@ -5,10 +5,7 @@
       <label>Select how severe you think the author of the following text suffers from depression:</label>
       <div class="lead container sample-text">
         <a class="btn btn-primary btn-sm pull-right" href="/observation/details/<%= data._id %>">View Details</a>
-        <% if (data.title) { %>
-          <h4><%= data.title %></h4>
-        <% } %>
-        <%= data.content_text %>
+          <%= data.content_text %>
       </div>
 
 
