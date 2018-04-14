@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
       INNER JOIN reddit.posts p
       ON p._id = c.sample_id
     )
-    AND s.compound < -0.9
+    AND s.compound < -0.596
     `
 
     connection.query(query, [req.user.id], (err, rows) => {
