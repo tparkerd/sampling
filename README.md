@@ -1,5 +1,5 @@
 # sampling
-### [Demo](http://cop4935group19.ddns.net/)
+### [Demo](http://sampling.timparker.me/)
 
 ### Installation and Setup
 #### Step 0: Dependencies<sup>1</sup>
